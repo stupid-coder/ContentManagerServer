@@ -3,4 +3,4 @@
 * 简介
   该WIKI为CMS的接口文档。
 * 具体接口文件说明
-  + [[content-management-interface.org][内容管理接口说明]]
+  + [[https://github.com/stupid-coder/ContentManagerServer/wiki/content-management-interface][内容管理接口说明]]
