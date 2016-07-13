@@ -1,0 +1,110 @@
+#+TITLE: content management server interface
+
+* 接口说明
+  该文件用于说明CMS中文档添加，修改，删除等操作的接口。
+
+* 接口详情
+  该接口采取RESTFUL接口设计风格，整体接口为：/content/id/type/status/
+  具体每个子段含义：
+  + content :: 当前内容管理的接口前缀
+  + id :: 当前操作的内容的id
+  + type :: 当前操作的内容的种类，新闻、体育等
+  + status :: 当前操作的内容的状态，添加、删除、投放中等
+   
+  *type* *status* 具体的字典由前端具体业务进行设置。
+  
+** 列表获取接口
+   URI: http://ip:port/content/*/{type}/{status}/{size}/
+   METHOD: *GET*
+   FORMAT: *JSON*
+   
+*** 请求参数说明
+    #+CAPTION: 请求参数
+    | 字段   | 说明           |
+    |--------+----------------|
+    | type   | 请求的内容列表种类 |
+    | status | 请求的内容列表状态 |
+    | size   | 请求的内容列表数量      |
+
+*** 响应结构体结构体
+    List<Content> Content具体的字段如下：
+    #+CAPTION: 响应结构体
+    | 字段        | 说明             |
+    |-------------+------------------|
+    | id          | 文章的ID         |
+    | title       | 文章的题目       |
+    | create_time | 文章的创建时间戳 |
+    
+** 文章获取接口    
+   URI: http://ip:port/content/{id}/
+   METHOD：*GET*
+   FORMAT: *JSON*
+
+*** 请求参数说明
+    #+CAPTION: 请求参数说明
+    | 字段 | 说明 |
+    |------+------|
+    | id   | 获取内容的ID |
+
+*** 响应结构体
+    #+CAPTION: 响应结构体
+    | 字段        | 说明             |
+    |-------------+------------------|
+    | id          | 文章的ID         |
+    | title       | 文章的题目       |
+    | content     | 文章的内容       |
+    | type        | 文章的类型       |
+    | status      | 文章的状态       |
+    | create_time | 文章的创建时间戳 |
+    | modify_time | 文章的最新修改时间戳 |
+
+** 文章添加接口
+   URI: http://ip:port/content/
+   METHOD: *POST*
+   FORMAT: *JSON*
+   
+*** 请求结构体
+    #+CAPTION: 请求结构体
+    | 字段    | 说明       |
+    |---------+------------|
+    | title   | 文章的题目 |
+    | content | 文章的内容 |
+    | type    | 文章的类型 |
+    | status  | 文章的状态 |
+
+*** 响应结构体
+    NULL
+
+** 文章更新接口
+   URI: http://ip:port/content/{id}/*/{status}/
+   METHOD: *PUT*
+   FORMAT: *JSON*
+   
+*** 请求参数说明
+    #+CAPTION: 请求参数说明
+    | 字段   | 说明           |
+    |--------+----------------|
+    | id     | 文章的ID       |
+    | status | 文章更新的状态 |
+
+*** 响应结构体
+    NULL
+
+** 文章删除接口
+   URI: http://ip:port/content/{id}/
+   METHOD: *DELETE*
+
+*** 请求参数说明
+    #+CAPTION: 请求参数说明
+    | 参数 | 说明           |
+    |------+----------------|
+    | id   | 待删除的文章ID |
+
+*** 响应结构体
+    NULL
+
+* 说明
+  具体接口，会在实际对接中进行一些修改！
+  
+
+
