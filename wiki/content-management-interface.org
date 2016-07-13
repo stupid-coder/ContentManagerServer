@@ -15,7 +15,9 @@
   
 ** 列表获取接口
    URI: http://ip:port/content/*/{type}/{status}/{size}/
+   
    METHOD: *GET*
+   
    FORMAT: *JSON*
    
 *** 请求参数说明
@@ -27,6 +29,7 @@
     | size   | 请求的内容列表数量      |
 
 *** 响应结构体结构体
+    
     List<Content> Content具体的字段如下：
     #+CAPTION: 响应结构体
     | 字段        | 说明             |
@@ -37,7 +40,9 @@
     
 ** 文章获取接口    
    URI: http://ip:port/content/{id}/
+   
    METHOD：*GET*
+   
    FORMAT: *JSON*
 
 *** 请求参数说明
@@ -60,7 +65,9 @@
 
 ** 文章添加接口
    URI: http://ip:port/content/
+   
    METHOD: *POST*
+   
    FORMAT: *JSON*
    
 *** 请求结构体
@@ -77,7 +84,9 @@
 
 ** 文章更新接口
    URI: http://ip:port/content/{id}/*/{status}/
+   
    METHOD: *PUT*
+   
    FORMAT: *JSON*
    
 *** 请求参数说明
@@ -92,6 +101,7 @@
 
 ** 文章删除接口
    URI: http://ip:port/content/{id}/
+   
    METHOD: *DELETE*
 
 *** 请求参数说明
