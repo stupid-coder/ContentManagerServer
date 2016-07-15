@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -56,12 +57,12 @@ public class ContentDaoImpl extends JdbcDaoSupport implements ContentDao {
     public int addContentModel(ContentPO content) {
         String sql;
         if ( content.getStatus() == null ) {
-            sql = String.format("INSERT INTO %s(meta_info,title,content,type) VALUES(?,?,?,?)", table_name);
-            return this.getJdbcTemplate().update(sql, content.getMeta_info(), content.getTitle(), content.getContent(), content.getType());
+            sql = String.format("INSERT INTO %s(meta_info,title,content,type,create_time) VALUES(?,?,?,?,?)", table_name);
+            return this.getJdbcTemplate().update(sql, content.getMeta_info(), content.getTitle(), content.getContent(), content.getType(),new Date());
         }
         else {
-            sql = String.format("INSERT INTO %s(meta_info,title,content,type,status) VALUES(?,?,?,?,?)", table_name);
-            return this.getJdbcTemplate().update(sql, content.getMeta_info(), content.getTitle(),content.getContent(),content.getType(),content.getStatus());
+            sql = String.format("INSERT INTO %s(meta_info,title,content,type,status,create_time) VALUES(?,?,?,?,?,?)", table_name);
+            return this.getJdbcTemplate().update(sql, content.getMeta_info(), content.getTitle(),content.getContent(),content.getType(),content.getStatus(),new Date());
         }
     }
 
