@@ -13,6 +13,7 @@ public class ContentPO implements java.io.Serializable, RowMapper<ContentPO> {
     private static final long serialVersionUID = 1L;
 
     private String id;
+    private String meta_info;
     private String title;
     private String content;
     private String type;
@@ -24,8 +25,13 @@ public class ContentPO implements java.io.Serializable, RowMapper<ContentPO> {
     public ContentPO mapRow(ResultSet resultSet, int i) throws SQLException {
         ContentPO content = new ContentPO();
         content.setId(resultSet.getString("id"));
+        content.setMeta_info(resultSet.getString("meta_info"));
         content.setTitle(resultSet.getString("title"));
-        content.setContent(resultSet.getString("content"));
+        try {
+            content.setContent(resultSet.getString("content"));
+        } catch (SQLException e) {
+            content.setContent(null);
+        }
         content.setType(resultSet.getString("type"));
         content.setStatus(resultSet.getString("status"));
         content.setCreate_time(resultSet.getString("create_time"));
@@ -38,6 +44,14 @@ public class ContentPO implements java.io.Serializable, RowMapper<ContentPO> {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getMeta_info() {
+        return meta_info;
+    }
+
+    public void setMeta_info(String meta_info) {
+        this.meta_info = meta_info;
     }
 
     public String getTitle() {

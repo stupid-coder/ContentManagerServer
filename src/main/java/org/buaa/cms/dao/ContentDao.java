@@ -9,15 +9,15 @@ import java.util.List;
  */
 public interface ContentDao {
 
-    public List<ContentPO> getContentModel(String type, String status);
+    public List<ContentPO> getContentModels(String type, String status, int size);
 
     public ContentPO getContentModel(int id);
 
-    public void addContentModel(ContentPO content);
+    public int addContentModel(ContentPO content);
 
-    public void deleteContentModel(int id);
+    public int deleteContentModel(int id);
 
-    public void updateContentModel(int id, String status);
+    public int updateContentModel(int id, String status);
 
     public ContentPO getContentById(int id);
 

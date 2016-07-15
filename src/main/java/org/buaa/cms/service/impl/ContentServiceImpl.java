@@ -18,9 +18,8 @@ public class ContentServiceImpl implements ContentService
     @Autowired
     ContentDao contentDao;
 
-    @Override
-    public List<ContentPO> getContentModel(String type, String status) {
-        return contentDao.getContentModel(type,status);
+    public List<ContentPO> getContentModels(String type, String status, int size) {
+        return contentDao.getContentModels(type,status,size);
     }
 
     @Override
@@ -29,17 +28,17 @@ public class ContentServiceImpl implements ContentService
     }
 
     @Override
-    public void addContentModel(ContentPO content) {
-        contentDao.addContentModel(content);
+    public int addContentModel(ContentPO content) {
+        return contentDao.addContentModel(content);
     }
 
     @Override
-    public void deleteContentModel(int id) {
-        contentDao.deleteContentModel(id);
+    public int deleteContentModel(int id) {
+        return contentDao.deleteContentModel(id);
     }
 
     @Override
-    public void updateContentModel(int id, String status) {
-        contentDao.updateContentModel(id,status);
+    public int updateContentModel(int id, String status) {
+        return contentDao.updateContentModel(id,status);
     }
 }

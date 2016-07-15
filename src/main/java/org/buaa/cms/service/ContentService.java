@@ -9,14 +9,14 @@ import java.util.List;
  */
 public interface ContentService {
 
-    public List<ContentPO> getContentModel(String type, String status);
+    public List<ContentPO> getContentModels(String type, String status, int size);
 
     public ContentPO getContentModel(int id);
 
-    public void addContentModel(ContentPO content);
+    public int addContentModel(ContentPO content);
 
-    public void deleteContentModel(int contentId);
+    public int deleteContentModel(int contentId);
 
-    public void updateContentModel(int contentId, String status);
+    public int updateContentModel(int contentId, String status);
 
 }
