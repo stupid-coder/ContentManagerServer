@@ -34,7 +34,7 @@ public class ContentDaoImpl extends JdbcDaoSupport implements ContentDao {
     @Transactional
     public List<ContentPO> getContentModels(String type, String status, int size) {
         String sql;
-        if ( type.compareTo("*") == 0 || status.compareTo("*") == 0 ) {
+        if ( type.compareTo("*") != 0 && status.compareTo("*") != 0 ) {
             if (size <= 0)
                 sql = String.format("SELECT id,meta_info,title,type,status,,create_time FROM %s WHERE type=? and status=? ORDER BY create_time DESC", table_name);
             else
