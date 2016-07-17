@@ -27,7 +27,7 @@ public class ContentController {
     @Resource
     ContentService contentService;
 
-    @RequestMapping(value="/content/*/{type}/{status}/{size}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/content/*/{type}/{status}/{size}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public WrapperHttpUtils getContents(HttpServletRequest request,
                                         HttpServletResponse response,
                                         @PathVariable("type") String type,
