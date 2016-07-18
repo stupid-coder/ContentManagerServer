@@ -40,7 +40,8 @@ public class FileUploadConroller {
                                @PathVariable("id") int id,
                                @RequestParam("picture") MultipartFile[] files)
     {
-        logger.info("upload"+path);
+        logger.info("upload:"+path);
+        logger.info("upload:"+System.getProperties());
         File uploadRootDir = new File(path+id);
 
         if ( !uploadRootDir.exists() ) {
