@@ -41,7 +41,7 @@
 ** 文章获取接口    
    URI: http://ip:port/content/{id}/
    
-   METHOD：*GET*
+   METHOD: *GET*
    
    FORMAT: *JSON*
 

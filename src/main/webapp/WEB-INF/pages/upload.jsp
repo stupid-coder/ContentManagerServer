@@ -9,7 +9,7 @@ pageEncoding="UTF-8"%>
 
 <h3>Upload One File:</h3>
 
-<form method="POST" action="upload/0/" enctype="multipart/form-data">
+<form method="POST" action="upload/" enctype="multipart/form-data">
     File to upload: <input type="file" name="picture"><br />
     <input type="submit" value="Upload">
 </form>
