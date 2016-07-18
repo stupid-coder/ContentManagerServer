@@ -4,3 +4,4 @@
   该WIKI为CMS的接口文档。
 * 具体接口文件说明
   + [[https://github.com/stupid-coder/ContentManagerServer/wiki/content-management-interface][内容管理接口说明]]
+  + [[https://github.com/stupid-coder/ContentManagerServer/wiki/content-picture-interface][图片上传及获取图片的说明]]
