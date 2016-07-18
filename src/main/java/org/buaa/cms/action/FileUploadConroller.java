@@ -26,7 +26,7 @@ public class FileUploadConroller {
 
     private static Log logger = LogFactory.getLog(FileUploadConroller.class);
 
-    private static final String path = System.getProperty("catalina.base")+"/cms/pictures/";
+    private static final String path = System.getProperty("catalina.base")+"/cms/picture/";
 
     @RequestMapping(value="/uploadtest", method = RequestMethod.GET)
     public String uploadtest()
@@ -66,7 +66,7 @@ public class FileUploadConroller {
                     stream.write(bytes);
                     stream.close();
 
-                    uris.add("pictures"+File.separator+id+File.separator+temp_name);
+                    uris.add("picture"+File.separator+id+File.separator+temp_name);
 
                 } catch (Exception e) {
                     e.printStackTrace();
