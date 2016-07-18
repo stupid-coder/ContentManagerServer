@@ -1,5 +1,7 @@
 package org.buaa.cms.action;
 
+
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.buaa.cms.po.ContentPO;
@@ -36,7 +38,18 @@ public class ContentController {
     {
         List<ContentPO> contentPOList  = contentService.getContentModels(type,status,size);
         if ( contentPOList.size() == 0 ) return new WrapperHttpUtils(null,-1,"failure to get contents");
-        else return new WrapperHttpUtils(contentPOList);
+        else {
+            JSONObject wrapper_response = new JSONObject();
+            wrapper_response.put("contents",contentPOList);
+            wrapper_response.put("size",contentPOList.size());
+            int status0 = 0;
+            for ( ContentPO content : contentPOList ) {
+                if ( content.getStatus().compareTo("0") == 0 ) status0++;
+            }
+            wrapper_response.put("status0",status0);
+            wrapper_response.put("status1",contentPOList.size()-status0);
+            return new WrapperHttpUtils(wrapper_response);
+        }
     }
 
     @RequestMapping(value="/content/{id}/", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
