@@ -83,18 +83,22 @@
     NULL
 
 ** 文章更新接口
-   URI: http://ip:port/content/{id}/*/{status}/
+   URI: http://ip:port/content/{id}/
    
    METHOD: *PUT*
    
    FORMAT: *JSON*
    
+   其中 id 为文章id
 *** 请求参数说明
     #+CAPTION: 请求参数说明
-    | 字段   | 说明           |
-    |--------+----------------|
-    | id     | 文章的ID       |
-    | status | 文章更新的状态 |
+    | 字段      | 说明           |
+    |-----------+----------------|
+    | status    | 文章更新的状态 |
+    | title     | 文章的标题     |
+    | content   | 文章的内容     |
+    | type      | 文章类型       |
+    | meta_info | 文章的元信息   |
 
 *** 响应结构体
     NULL
@@ -113,6 +117,25 @@
 *** 响应结构体
     NULL
 
+** 文章推荐接口
+   URI：http://ip:port/content/rec/{id}/{type}/{status}/{size}/
+   
+   METHOD: *GET*
+
+   其中：
+   id 为当前推荐文章的id，status 为要推荐文章的状态，type 为要推荐文章
+   的类型，size 为要推荐结果的数量。
+   
+** 上/下一篇文章
+    URI: http://ip:port/content/prev/{id}/{type}/{status}/
+    
+    URI: http://ip:port/content/next/{id}/{type}/{status}/
+
+    METHOD: *GET*
+
+    其中：
+    id 为当前文章id，type为下一篇的类型，status为下一遍的状态
+    
 * 说明
   具体接口，会在实际对接中进行一些修改！
   

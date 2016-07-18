@@ -17,8 +17,12 @@ public interface ContentDao {
 
     public int deleteContentModel(int id);
 
-    public int updateContentModel(int id, String status);
+    public int updateContentModel(int id, ContentPO content);
 
     public ContentPO getContentById(int id);
+
+    public List<ContentPO> recContentModels(String type, String status, int id, int size);
+
+    public ContentPO prevnextContentModel(String type, String status, int id, int flag);
 
 }

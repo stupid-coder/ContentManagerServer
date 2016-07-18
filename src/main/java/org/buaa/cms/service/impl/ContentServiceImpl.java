@@ -38,7 +38,25 @@ public class ContentServiceImpl implements ContentService
     }
 
     @Override
-    public int updateContentModel(int id, String status) {
-        return contentDao.updateContentModel(id,status);
+    public int updateContentModel(int id, ContentPO content) {
+        return contentDao.updateContentModel(id,content);
+    }
+
+    @Override
+    public List<ContentPO> recContentModels(String type, String status, int id, int size) {
+        List<ContentPO> contentPOList = contentDao.recContentModels(type,status,id,size);
+        for ( ContentPO contentPO : contentPOList ) {
+            if ( Integer.parseInt(contentPO.getId()) == id ) {
+                contentPOList.remove(contentPO);
+                break;
+            }
+        }
+        return contentPOList;
+    }
+
+    @Override
+    public ContentPO prevnextContentModel(String type, String status, int id, int flag)
+    {
+        return contentDao.prevnextContentModel(type,status,id,flag);
     }
 }

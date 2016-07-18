@@ -17,6 +17,9 @@ public interface ContentService {
 
     public int deleteContentModel(int contentId);
 
-    public int updateContentModel(int contentId, String status);
+    public int updateContentModel(int contentId, ContentPO status);
 
+    public List<ContentPO> recContentModels(String type, String status, int id, int size);
+
+    public ContentPO prevnextContentModel(String type, String status, int id, int flag);
 }

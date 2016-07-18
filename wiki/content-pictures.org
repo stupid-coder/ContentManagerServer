@@ -1,0 +1,12 @@
+#+TITLE: content management service - picture interfaces
+
+* 图片相关接口说明
+  图片与文章进行一对一绑定，所有在删除文章的同时可以删除图片。
+  上传的逻辑为：编辑文章的同时，记录当前图片的序号从0开始，则对应的uri
+  为 http://ip:port/uri/picture/文章id/0.jpg ,依次叠加。
+  再编辑完文章，点击保存时候，文章及图片同时上传。
+** 上传接口
+   URI: http://ip:port/uri/content/upload/{id}/
+   其中 id 为当前上传图片对应的文章id。
+   
+    

@@ -72,22 +72,57 @@ public class ContentController {
         else return new WrapperHttpUtils(null,-1,"failure to add content");
     }
 
-    @RequestMapping(value="/content/{id}/*/{status}/",method = RequestMethod.PUT)
+    @RequestMapping(value="/content/{id}/",method = RequestMethod.PUT)
     public WrapperHttpUtils updateContent(HttpServletRequest request, HttpServletResponse response,
                                           @PathVariable("id") int id,
-                                          @PathVariable("status") String type)
+                                          @RequestBody ContentPO content)
     {
-        if ( contentService.updateContentModel(id,type) == 1 )
+        if ( contentService.updateContentModel(id,content) == 1 )
             return new WrapperHttpUtils(null);
         else return new WrapperHttpUtils(null,-1,"failure to update content");
     }
 
-    @RequestMapping(value="/content/{contentId}/", method = RequestMethod.DELETE)
+    @RequestMapping(value="/content/{id}/", method = RequestMethod.DELETE)
     public WrapperHttpUtils deleteContent(HttpServletRequest request,HttpServletResponse response,
-                                          @PathVariable("contentId") int id)
+                                          @PathVariable("id") int id)
     {
         if ( contentService.deleteContentModel(id) == 1 )
             return new WrapperHttpUtils(null);
         else return new WrapperHttpUtils(null,-1,"failure to delete content");
+    }
+
+    @RequestMapping(value="/content/rec/{id}/{type}/{status}/{size}/", method = RequestMethod.GET)
+    public WrapperHttpUtils recContent(HttpServletRequest request,HttpServletResponse response,
+                                       @PathVariable("id") int id,
+                                       @PathVariable("type") String type,
+                                       @PathVariable("status") String status,
+                                       @PathVariable("size") int size)
+    {
+        List<ContentPO> recContent = contentService.recContentModels(type,status,id,size);
+        if ( recContent == null || recContent.size() == 0 )
+            return new WrapperHttpUtils(null,-1,"failure to recommendation content");
+        return new WrapperHttpUtils(recContent);
+    }
+
+    @RequestMapping(value="/content/prev/{id}/{type}/{status}/", method = RequestMethod.GET )
+    public WrapperHttpUtils prevContent(HttpServletRequest request, HttpServletResponse response,
+                                        @PathVariable("id") int id,
+                                        @PathVariable("type") String type,
+                                        @PathVariable("status") String status)
+    {
+        ContentPO contentPO = contentService.prevnextContentModel(type,status,id,-1);
+        if ( contentPO == null ) return new WrapperHttpUtils(null,-1,"failure to get previous content");
+        else return new WrapperHttpUtils(contentPO);
+    }
+
+    @RequestMapping(value="/content/next/{id}/{type}/{status}/", method = RequestMethod.GET )
+    public WrapperHttpUtils nextContent(HttpServletRequest request,HttpServletResponse response,
+                                        @PathVariable("id") int id,
+                                        @PathVariable("type") String type,
+                                        @PathVariable("status") String status)
+    {
+        ContentPO contentPO = contentService.prevnextContentModel(type,status,id,1);
+        if ( contentPO == null ) return new WrapperHttpUtils(null,-1,"failure to get next content");
+        else return new WrapperHttpUtils(contentPO);
     }
 }

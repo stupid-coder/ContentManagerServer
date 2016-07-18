@@ -24,17 +24,49 @@ public class ContentPO implements java.io.Serializable, RowMapper<ContentPO> {
     @Override
     public ContentPO mapRow(ResultSet resultSet, int i) throws SQLException {
         ContentPO content = new ContentPO();
-        content.setId(resultSet.getString("id"));
-        content.setMeta_info(resultSet.getString("meta_info"));
-        content.setTitle(resultSet.getString("title"));
+
+        try {
+            content.setId(resultSet.getString("id"));
+        } catch (SQLException e) {
+            content.setId(null);
+        }
+
+        try {
+            content.setMeta_info(resultSet.getString("meta_info"));
+        } catch (SQLException e) {
+            content.setMeta_info(null);
+        }
+
+        try {
+            content.setTitle(resultSet.getString("title"));
+        } catch (SQLException e) {
+            content.setTitle(null);
+        }
+
         try {
             content.setContent(resultSet.getString("content"));
         } catch (SQLException e) {
             content.setContent(null);
         }
-        content.setType(resultSet.getString("type"));
-        content.setStatus(resultSet.getString("status"));
-        content.setCreate_time(resultSet.getString("create_time"));
+
+        try {
+            content.setType(resultSet.getString("type"));
+        } catch (SQLException e) {
+            content.setTitle(null);
+        }
+
+        try {
+            content.setStatus(resultSet.getString("status"));
+        } catch (SQLException e) {
+            content.setStatus(null);
+        }
+
+        try {
+            content.setCreate_time(resultSet.getString("create_time"));
+        } catch (SQLException e) {
+            content.setCreate_time(null);
+        }
+
         return content;
     }
 
