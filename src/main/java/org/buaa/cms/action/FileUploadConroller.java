@@ -26,7 +26,7 @@ public class FileUploadConroller {
 
     private static Log logger = LogFactory.getLog(FileUploadConroller.class);
 
-    private static final String path = System.getenv("CATALINA_HOME")+"/pictures";
+    private static final String path = System.getenv("CATALINA_HOME")+"/cms/pictures/";
 
     @RequestMapping(value="/uploadtest", method = RequestMethod.GET)
     public String uploadtest()
@@ -34,15 +34,16 @@ public class FileUploadConroller {
         return "upload";
     }
 
-    @RequestMapping(value="/upload/", method = RequestMethod.POST)
+    @RequestMapping(value="/upload/{id}/", method = RequestMethod.POST)
     @ResponseBody
     public List<String> upload(HttpServletRequest request, HttpServletResponse response,
+                               @PathVariable("id") int id,
                                @RequestParam("picture") MultipartFile[] files)
     {
-        File uploadRootDir = new File(path);
+        File uploadRootDir = new File(path+id);
 
         if ( !uploadRootDir.exists() ) {
-            uploadRootDir.mkdir();
+            uploadRootDir.mkdirs();
         }
 
         List<String> uris = new ArrayList<String>();
@@ -51,23 +52,21 @@ public class FileUploadConroller {
         {
             MultipartFile file = files[i];
             String name = file.getOriginalFilename();
+            String temp_name = i+"."+name.substring(name.lastIndexOf(".")+1);
+
             if ( name != null && name.length() > 0 ) {
                 try {
-                    String temp_name = TimeUtils.GetTimeStamps()+"_"+name;
-                    File sub_path = new File(uploadRootDir.getAbsolutePath()+File.separator+Math.abs(temp_name.hashCode()%100));
-
-                    if ( !sub_path.exists() ) sub_path.mkdir();
 
                     byte[] bytes = file.getBytes();
 
-                    File serverFile = new File(sub_path.getAbsolutePath()+File.separator+temp_name);
+                    File temp_file = new File(uploadRootDir.getAbsolutePath()+File.separator+temp_name);
 
-                    BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+                    BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(temp_file));
 
                     stream.write(bytes);
                     stream.close();
 
-                    uris.add("picture/"+temp_name);
+                    uris.add("pictures"+File.separator+id+File.separator+temp_name);
 
                 } catch (Exception e) {
                     e.printStackTrace();
