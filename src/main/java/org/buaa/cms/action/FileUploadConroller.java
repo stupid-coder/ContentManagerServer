@@ -26,7 +26,7 @@ public class FileUploadConroller {
 
     private static Log logger = LogFactory.getLog(FileUploadConroller.class);
 
-    private static final String path = System.getenv("CATALINA_HOME")+"/cms/pictures/";
+    private static final String path = System.getProperty("catalina.base")+"/cms/pictures/";
 
     @RequestMapping(value="/uploadtest", method = RequestMethod.GET)
     public String uploadtest()
@@ -40,8 +40,6 @@ public class FileUploadConroller {
                                @PathVariable("id") int id,
                                @RequestParam("picture") MultipartFile[] files)
     {
-        logger.info("upload:"+path);
-        logger.info("upload:"+System.getProperties());
         File uploadRootDir = new File(path+id);
 
         if ( !uploadRootDir.exists() ) {
