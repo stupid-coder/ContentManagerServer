@@ -32,7 +32,6 @@ public class MD5Utils {
                     buf.append("0");
                 buf.append(Integer.toHexString(i));
             }
-            //32位加密
             return buf.toString();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
