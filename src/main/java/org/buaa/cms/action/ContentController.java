@@ -77,6 +77,7 @@ public class ContentController {
                                           @PathVariable("id") int id,
                                           @RequestBody ContentPO content)
     {
+        logger.info(String.format("updateContent: id - %d\tcontent - %s",id,content));
         if ( contentService.updateContentModel(id,content) == 1 )
             return new WrapperHttpUtils(null);
         else return new WrapperHttpUtils(null,-1,"failure to update content");

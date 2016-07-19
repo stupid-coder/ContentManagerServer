@@ -133,4 +133,18 @@ public class ContentPO implements java.io.Serializable, RowMapper<ContentPO> {
     public void setModify_time(String modify_time) {
         this.modify_time = modify_time;
     }
+
+    @Override
+    public String toString() {
+        return "ContentPO{" +
+                "id='" + id + '\'' +
+                ", meta_info='" + meta_info + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", type='" + type + '\'' +
+                ", status='" + status + '\'' +
+                ", create_time='" + create_time + '\'' +
+                ", modify_time='" + modify_time + '\'' +
+                '}';
+    }
 }
