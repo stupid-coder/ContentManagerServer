@@ -80,12 +80,14 @@ public class ContentDaoImpl extends JdbcDaoSupport implements ContentDao {
     @Transactional
     public int updateContentModel(int id, ContentPO content) {
         List<Object> params = new ArrayList<Object>();
+        List<String> sets = new ArrayList<String>();
         String sql = String.format("UPDATE %s SET ",table_name);
-        if ( content.getContent() != null ) { params.add(content.getContent());  sql += " content=? "; }
-        if ( content.getMeta_info() != null ) { params.add(content.getMeta_info()); sql += " meta_info=? "; }
-        if ( content.getStatus() != null ) { params.add(content.getStatus()); sql += " status=? "; }
-        if ( content.getTitle() != null ) { params.add(content.getTitle()); sql += " title=? "; }
-        if ( content.getType() != null )  { params.add(content.getType()); sql += " type=? "; }
+        if ( content.getContent() != null ) { params.add(content.getContent());  sets.add(" content=? "); }
+        if ( content.getMeta_info() != null ) { params.add(content.getMeta_info()); sets.add(" meta_info=? "); }
+        if ( content.getStatus() != null ) { params.add(content.getStatus()); sets.add(" status=? "); }
+        if ( content.getTitle() != null ) { params.add(content.getTitle()); sets.add(" title=? "); }
+        if ( content.getType() != null )  { params.add(content.getType()); sets.add(" type=? "); }
+        sql += StringUtils.join(sets,",");
         sql += " WHERE id=? ";
         params.add(id);
         return this.getJdbcTemplate().update(sql,params.toArray());
