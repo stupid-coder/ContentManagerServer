@@ -36,15 +36,23 @@ public class ContentDaoImpl extends JdbcDaoSupport implements ContentDao {
     @Override
     @Transactional
     public List<ContentPO> getContentModels(String type, String status, int size) {
+
+        List<String> where = new ArrayList<String>();
+        List<Object> params = new ArrayList<Object>();
+
+        if ( type.compareTo("*") != 0 ) { where.add(" type=? "); params.add(type); }
+        if ( status.compareTo("*") != 0 ) { where.add(" status=? "); params.add(status); }
+
+        if ( size <= 0 ) {
+            size = 999;
+        }
+
         String sql;
-        if ( type.compareTo("*") != 0 && status.compareTo("*") != 0 ) {
-            if (size <= 0)
-                sql = String.format("SELECT id,meta_info,title,type,status,create_time FROM %s WHERE type=? and status=? ORDER BY create_time DESC", table_name);
-            else
-                sql = String.format("SELECT id,meta_info,title,type,status,create_time FROM %s WHERE type=? and status=? ORDER BY create_time DESC LIMIT %d", table_name, size);
-            return this.getJdbcTemplate().query(sql, new ContentPO(), type, status);
+        if ( where.size() != 0 ) {
+            sql = String.format("SELECT id,meta_info,title,type,status,create_time FROM %s WHERE %s ORDER BY create_time DESC LIMIT %d", table_name, StringUtils.join(where, " AND "), size);
+            return this.getJdbcTemplate().query(sql, new ContentPO(), params.toArray());
         } else {
-            sql = String.format("SELECT id,meta_info,title,type,status,create_time FROM %s ORDER BY create_time DESC",table_name);
+            sql = String.format("SELECT id,meta_info,title,type,status,create_time FROM %s ORDER BY create_time DESC LIMIT %d", table_name, size);
             return this.getJdbcTemplate().query(sql, new ContentPO());
         }
     }

@@ -2,10 +2,10 @@
 
 * 图片相关接口说明
 ** 上传接口
-   URI: http://ip:port/ContentManagementService/content/upload/
+   URI: http://ip:port/ContentManagementService/picture/upload/
    
    上传使用的是HTML的form，具体的样例和字段在
-   http://ip:port/ContentManagementService/content/uploadtest/ 
+   http://ip:port/ContentManagementService/picture/uploadtest/ 
 
    返回 list 列表 [ index/md5.jpg ] 形式。
 
