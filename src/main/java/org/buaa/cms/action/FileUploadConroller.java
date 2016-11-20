@@ -33,11 +33,13 @@ public class FileUploadConroller {
     @Resource
     PictureService pictureService;
 
+    /*
     @RequestMapping(value="/uploadtest", method = RequestMethod.GET)
     public String uploadtest()
     {
         return "upload";
     }
+    */
 
     @RequestMapping(value="/upload/", method = RequestMethod.POST)
     @ResponseBody

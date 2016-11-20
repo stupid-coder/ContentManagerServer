@@ -18,6 +18,7 @@ public class ContentServiceImpl implements ContentService
     @Autowired
     ContentDao contentDao;
 
+    @Override
     public List<ContentPO> getContentModels(String type, String status, int size) {
         return contentDao.getContentModels(type,status,size);
     }
